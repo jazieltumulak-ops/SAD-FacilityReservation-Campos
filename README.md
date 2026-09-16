@@ -69,12 +69,15 @@ Completed
 
 Administrator:
 admin@adssu.edu.ph
+admin123
 
 Facility Staff:
 staff@adssu.edu.ph
+staff123
 
 Requester:
 jahaziel@adssu.edu.ph
+jahaziel123
 
 ## Deployment
 
