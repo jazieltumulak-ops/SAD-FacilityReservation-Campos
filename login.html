@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>
+        Login | Facility Reservation Management System
+    </title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+</head>
+
+
+<body class="login-page">
+
+
+<div class="login-wrapper">
+
+
+    <!-- LEFT SIDE -->
+    <div class="login-brand-panel">
+
+        <div class="brand">
+
+            <div class="brand-logo">
+                <i class="fa-solid fa-building-columns"></i>
+            </div>
+
+            <div class="brand-text">
+                <strong>FRMS</strong>
+                <span>ADSSU CAMPUS</span>
+            </div>
+
+        </div>
+
+
+        <div class="brand-content">
+
+            <div class="eyebrow light">
+                AGUSAN DEL SUR STATE UNIVERSITY
+            </div>
+
+            <h1>
+                Facility
+                <br>
+                <span>Reservation</span>
+            </h1>
+
+            <h3>
+                Management & Approval System
+            </h3>
+
+            <p>
+                A centralized digital platform for managing
+                campus facilities, reservations, approvals,
+                schedules and system activities.
+            </p>
+
+
+            <div class="feature">
+
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <i class="fa-solid fa-shield-halved"></i>
+                    </div>
+
+                    <div>
+                        <strong>Secure Access</strong>
+                        <span>Role-based authentication</span>
+                    </div>
+                </div>
+
+
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <i class="fa-solid fa-calendar-check"></i>
+                    </div>
+
+                    <div>
+                        <strong>Smart Reservations</strong>
+                        <span>Conflict-free scheduling</span>
+                    </div>
+                </div>
+
+
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <i class="fa-solid fa-clock-rotate-left"></i>
+                    </div>
+
+                    <div>
+                        <strong>Audit Trail</strong>
+                        <span>Complete activity monitoring</span>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="login-brand-footer">
+
+            Systems Analysis and Design
+
+            <span>•</span>
+
+            Academic Facility Management
+
+        </div>
+
+    </div>
+
+
+
+    <!-- RIGHT SIDE -->
+    <div class="login-form-panel">
+
+        <div class="login-card">
+
+            <div class="secure-lock">
+                <i class="fa-solid fa-lock"></i>
+            </div>
+
+            <div class="eyebrow">
+                SECURE LOGIN
+            </div>
+
+            <h2>
+                Welcome Back
+            </h2>
+
+            <p class="login-description">
+                Sign in to access the Facility Reservation
+                Management System.
+            </p>
+
+
+            <form id="loginForm">
+
+
+                <label>
+
+                    Email Address
+
+                    <div class="input-wrapper">
+
+                        <i class="fa-regular fa-envelope"></i>
+
+                        <input
+                            type="email"
+                            id="email"
+                            placeholder="you@example.com"
+                            autocomplete="username"
+                            required>
+
+                    </div>
+
+                </label>
+
+
+                <label>
+
+                    Password
+
+                    <div class="input-wrapper">
+
+                        <i class="fa-solid fa-lock"></i>
+
+                        <input
+                            type="password"
+                            id="password"
+                            placeholder="Enter your password"
+                            autocomplete="current-password"
+                            required>
+
+                        <button
+                            type="button"
+                            id="togglePassword"
+                            class="password-toggle">
+
+                            <i class="fa-regular fa-eye"></i>
+
+                        </button>
+
+                    </div>
+
+                </label>
+
+
+                <div
+                    id="loginMessage"
+                    class="form-message">
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="login-button">
+
+                    <span>Sign In</span>
+
+                    <i class="fa-solid fa-arrow-right"></i>
+
+                </button>
+
+            </form>
+
+
+            <div class="access-panel">
+
+                <div class="access-title">
+                    <i class="fa-solid fa-users"></i>
+                    SYSTEM ACCESS
+                </div>
+
+
+                <div class="access-roles">
+
+                    <div>
+                        <span class="role-dot administrator"></span>
+                        Administrator
+                    </div>
+
+                    <div>
+                        <span class="role-dot staff"></span>
+                        Facility Staff
+                    </div>
+
+                    <div>
+                        <span class="role-dot requester"></span>
+                        Requester
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="login-footer">
+
+                <span>
+                    Agusan del Sur State University
+                </span>
+
+                <span>•</span>
+
+                <span>
+                    Systems Analysis and Design
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script src="js/supabase.js"></script>
+<script src="js/auth.js"></script>
+
+
+<script>
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const password =
+        document.getElementById("password");
+
+    const toggle =
+        document.getElementById("togglePassword");
+
+
+    toggle.addEventListener("click", function () {
+
+        if (password.type === "password") {
+
+            password.type = "text";
+
+            this.innerHTML =
+                '<i class="fa-regular fa-eye-slash"></i>';
+
+        } else {
+
+            password.type = "password";
+
+            this.innerHTML =
+                '<i class="fa-regular fa-eye"></i>';
+
+        }
+
+    });
+
+});
+
+</script>
+
+</body>
+</html>

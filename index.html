@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Facility Reservation Management System</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+
+<body>
+
+<div class="app">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar" id="sidebar">
+
+        <div class="brand">
+            <div class="brand-logo">
+                <i class="fa-solid fa-building-columns"></i>
+            </div>
+
+            <div class="brand-text">
+                <strong>FRMS</strong>
+                <span>ADSSU CAMPUS</span>
+            </div>
+        </div>
+
+        <div class="user-box">
+
+            <div class="user-avatar" id="sidebarAvatar">
+                U
+            </div>
+
+            <div class="user-info">
+                <strong id="sidebarUserName">Loading...</strong>
+                <span id="sidebarUserRole">Loading...</span>
+            </div>
+
+        </div>
+
+        <div class="menu-title">
+            MAIN MENU
+        </div>
+
+        <nav class="sidebar-menu">
+
+            <a href="#dashboardSection"
+               class="menu-link active"
+               data-section="dashboardSection">
+
+                <i class="fa-solid fa-chart-pie"></i>
+                <span>Dashboard</span>
+
+            </a>
+
+            <a href="#facilitiesSection"
+               class="menu-link"
+               data-section="facilitiesSection">
+
+                <i class="fa-solid fa-building"></i>
+                <span>Facilities</span>
+
+            </a>
+
+            <a href="#reservationsSection"
+               class="menu-link"
+               data-section="reservationsSection">
+
+                <i class="fa-solid fa-calendar-check"></i>
+                <span>Reservations</span>
+
+            </a>
+
+            <a href="#approvalsSection"
+               class="menu-link admin-only"
+               data-section="approvalsSection">
+
+                <i class="fa-solid fa-circle-check"></i>
+                <span>Approvals</span>
+
+                <b class="menu-badge" id="approvalBadge">0</b>
+
+            </a>
+
+            <a href="#auditSection"
+               class="menu-link admin-only"
+               data-section="auditSection">
+
+                <i class="fa-solid fa-clock-rotate-left"></i>
+                <span>Audit Logs</span>
+
+            </a>
+
+        </nav>
+
+        <div class="sidebar-bottom">
+
+            <div class="connection">
+                <span class="online-dot"></span>
+                Supabase Connected
+            </div>
+
+            <button class="logout-button" id="logoutBtn">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                Sign Out
+            </button>
+
+        </div>
+
+    </aside>
+
+
+    <!-- MAIN -->
+    <main class="main">
+
+        <!-- TOPBAR -->
+        <header class="topbar">
+
+            <button class="mobile-menu" id="mobileMenuBtn">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+
+            <div class="breadcrumb">
+                <span>ADSSU</span>
+                <i class="fa-solid fa-chevron-right"></i>
+                <strong id="pageHeading">Dashboard</strong>
+            </div>
+
+            <div class="topbar-right">
+
+                <div class="system-online">
+                    <span class="online-dot"></span>
+                    System Online
+                </div>
+
+                <div class="top-avatar" id="headerAvatar">
+                    U
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <!-- CONTENT -->
+        <div class="content">
+
+
+            <!-- DASHBOARD -->
+            <section id="dashboardSection" class="page-section active">
+
+                <div class="welcome-header">
+
+                    <div>
+
+                        <div class="eyebrow">
+                            FACILITY RESERVATION SYSTEM
+                        </div>
+
+                        <h1>
+                            Welcome back,
+                            <span id="welcomeName">User</span>!
+                        </h1>
+
+                        <p>
+                            Manage campus facilities, reservations,
+                            approvals and schedules in one centralized system.
+                        </p>
+
+                    </div>
+
+                    <button
+                        class="btn primary requester-only"
+                        id="newReservationBtn">
+
+                        <i class="fa-solid fa-plus"></i>
+                        New Reservation
+
+                    </button>
+
+                </div>
+
+
+                <!-- STATISTICS -->
+                <div class="stats">
+
+                    <div class="stat-card">
+
+                        <div class="stat-icon blue">
+                            <i class="fa-solid fa-building"></i>
+                        </div>
+
+                        <div>
+                            <span>Total Facilities</span>
+                            <strong id="totalFacilities">0</strong>
+                        </div>
+
+                    </div>
+
+
+                    <div class="stat-card">
+
+                        <div class="stat-icon green">
+                            <i class="fa-solid fa-circle-check"></i>
+                        </div>
+
+                        <div>
+                            <span>Active Facilities</span>
+                            <strong id="activeFacilities">0</strong>
+                        </div>
+
+                    </div>
+
+
+                    <div class="stat-card">
+
+                        <div class="stat-icon orange">
+                            <i class="fa-solid fa-clock"></i>
+                        </div>
+
+                        <div>
+                            <span>Pending Requests</span>
+                            <strong id="pendingReservations">0</strong>
+                        </div>
+
+                    </div>
+
+
+                    <div class="stat-card">
+
+                        <div class="stat-icon purple">
+                            <i class="fa-solid fa-calendar-days"></i>
+                        </div>
+
+                        <div>
+                            <span>Approved / Scheduled</span>
+                            <strong id="approvedReservations">0</strong>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- FACILITIES PREVIEW -->
+                <div class="card">
+
+                    <div class="card-header">
+
+                        <div>
+                            <h2>Available Facilities</h2>
+                            <p>Recently added campus facilities</p>
+                        </div>
+
+                        <button
+                            class="btn outline"
+                            onclick="showSection('facilitiesSection')">
+
+                            View All
+                            <i class="fa-solid fa-arrow-right"></i>
+
+                        </button>
+
+                    </div>
+
+                    <div
+                        class="facility-grid"
+                        id="dashboardFacilities">
+
+                        <div class="loading-box">
+                            <i class="fa-solid fa-spinner fa-spin"></i>
+                            Loading facilities...
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- FACILITIES -->
+            <section id="facilitiesSection" class="page-section">
+
+                <div class="section-header">
+
+                    <div>
+
+                        <div class="eyebrow">
+                            RESOURCE MANAGEMENT
+                        </div>
+
+                        <h1>Facilities</h1>
+
+                        <p>
+                            Manage campus facilities and their current condition.
+                        </p>
+
+                    </div>
+
+                    <button
+                        class="btn primary admin-only"
+                        id="addFacilityBtn">
+
+                        <i class="fa-solid fa-plus"></i>
+                        Add Facility
+
+                    </button>
+
+                </div>
+
+
+                <div class="toolbar">
+
+                    <div class="search">
+
+                        <i class="fa-solid fa-magnifying-glass"></i>
+
+                        <input
+                            type="search"
+                            id="facilitySearch"
+                            placeholder="Search facility...">
+
+                    </div>
+
+                    <select
+                        class="select"
+                        id="facilityStatusFilter">
+
+                        <option value="">All Status</option>
+                        <option value="Active">Active</option>
+                        <option value="Inactive">Inactive</option>
+                        <option value="Maintenance">Maintenance</option>
+
+                    </select>
+
+                </div>
+
+
+                <div
+                    class="facility-grid large"
+                    id="facilityList">
+
+                </div>
+
+            </section>
+
+
+            <!-- RESERVATIONS -->
+            <section id="reservationsSection" class="page-section">
+
+                <div class="section-header">
+
+                    <div>
+
+                        <div class="eyebrow">
+                            SCHEDULE MANAGEMENT
+                        </div>
+
+                        <h1>Reservations</h1>
+
+                        <p>
+                            Track reservation requests and facility schedules.
+                        </p>
+
+                    </div>
+
+                    <button
+                        class="btn primary requester-only"
+                        onclick="openReservationModal()">
+
+                        <i class="fa-solid fa-plus"></i>
+                        New Reservation
+
+                    </button>
+
+                </div>
+
+
+                <div class="table-card">
+
+                    <div class="table-container">
+
+                        <table>
+
+                            <thead>
+
+                            <tr>
+                                <th>Facility</th>
+                                <th>Requester</th>
+                                <th>Date</th>
+                                <th>Time</th>
+                                <th>Purpose</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+
+                            </thead>
+
+                            <tbody id="reservationsTableBody">
+
+                            <tr>
+                                <td colspan="7" class="table-message">
+                                    Loading reservations...
+                                </td>
+                            </tr>
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- APPROVALS -->
+            <section id="approvalsSection" class="page-section">
+
+                <div class="section-header">
+
+                    <div>
+
+                        <div class="eyebrow">
+                            ADMINISTRATION
+                        </div>
+
+                        <h1>Reservation Approvals</h1>
+
+                        <p>
+                            Review and process pending reservation requests.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="table-card">
+
+                    <div class="table-container">
+
+                        <table>
+
+                            <thead>
+
+                            <tr>
+                                <th>Requester</th>
+                                <th>Facility</th>
+                                <th>Date</th>
+                                <th>Time</th>
+                                <th>Purpose</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+
+                            </thead>
+
+                            <tbody id="approvalsTableBody">
+
+                            <tr>
+                                <td colspan="7" class="table-message">
+                                    Loading approvals...
+                                </td>
+                            </tr>
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- AUDIT LOG -->
+            <section id="auditSection" class="page-section">
+
+                <div class="section-header">
+
+                    <div>
+
+                        <div class="eyebrow">
+                            SECURITY & ACCOUNTABILITY
+                        </div>
+
+                        <h1>Audit Logs</h1>
+
+                        <p>
+                            Monitor important system actions and status changes.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="table-card">
+
+                    <div class="table-container">
+
+                        <table>
+
+                            <thead>
+
+                            <tr>
+                                <th>Date & Time</th>
+                                <th>User</th>
+                                <th>Action</th>
+                                <th>Table</th>
+                                <th>Record ID</th>
+                                <th>Details</th>
+                            </tr>
+
+                            </thead>
+
+                            <tbody id="auditTableBody">
+
+                            <tr>
+                                <td colspan="6" class="table-message">
+                                    Loading audit logs...
+                                </td>
+                            </tr>
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+        </div>
+
+    </main>
+
+</div>
+
+
+<!-- ADD FACILITY MODAL -->
+<div class="modal" id="facilityModal">
+
+    <div class="modal-box">
+
+        <div class="modal-header">
+
+            <div>
+                <h2>Add Facility</h2>
+                <p>Create a new campus facility.</p>
+            </div>
+
+            <button class="close-modal" id="closeFacilityModal">
+                &times;
+            </button>
+
+        </div>
+
+
+        <form id="facilityForm">
+
+            <div class="form-grid">
+
+                <label>
+                    Facility Name
+                    <input
+                        id="facilityName"
+                        type="text"
+                        placeholder="e.g. Computer Laboratory 1"
+                        required>
+                </label>
+
+                <label>
+                    Category
+                    <input
+                        id="facilityCategory"
+                        type="text"
+                        placeholder="e.g. Laboratory"
+                        required>
+                </label>
+
+                <label>
+                    Location
+                    <input
+                        id="facilityLocation"
+                        type="text"
+                        placeholder="e.g. IT Building"
+                        required>
+                </label>
+
+                <label>
+                    Capacity
+                    <input
+                        id="facilityCapacity"
+                        type="number"
+                        min="1"
+                        placeholder="e.g. 40"
+                        required>
+                </label>
+
+                <label>
+                    Condition
+                    <select id="facilityCondition">
+                        <option>Good</option>
+                        <option>Fair</option>
+                        <option>Poor</option>
+                    </select>
+                </label>
+
+                <label>
+                    Status
+                    <select id="facilityStatus">
+                        <option>Active</option>
+                        <option>Inactive</option>
+                        <option>Maintenance</option>
+                    </select>
+                </label>
+
+            </div>
+
+            <div id="facilityMessage" class="form-message"></div>
+
+            <div class="modal-actions">
+
+                <button
+                    type="button"
+                    class="btn outline"
+                    id="cancelFacilityBtn">
+
+                    Cancel
+
+                </button>
+
+                <button
+                    type="submit"
+                    class="btn primary">
+
+                    <i class="fa-solid fa-floppy-disk"></i>
+                    Save Facility
+
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<!-- RESERVATION MODAL -->
+<div class="modal" id="reservationModal">
+
+    <div class="modal-box">
+
+        <div class="modal-header">
+
+            <div>
+                <h2>New Reservation</h2>
+                <p>Submit a facility reservation request.</p>
+            </div>
+
+            <button
+                class="close-modal"
+                id="closeReservationModal">
+
+                &times;
+
+            </button>
+
+        </div>
+
+
+        <form id="reservationForm">
+
+            <div class="form-grid">
+
+                <label>
+                    Facility
+
+                    <select
+                        id="reservationFacility"
+                        required>
+
+                        <option value="">
+                            Select facility
+                        </option>
+
+                    </select>
+
+                </label>
+
+
+                <label>
+                    Reservation Date
+
+                    <input
+                        id="reservationDate"
+                        type="date"
+                        required>
+
+                </label>
+
+
+                <label>
+                    Start Time
+
+                    <input
+                        id="startTime"
+                        type="time"
+                        required>
+
+                </label>
+
+
+                <label>
+                    End Time
+
+                    <input
+                        id="endTime"
+                        type="time"
+                        required>
+
+                </label>
+
+
+                <label class="full">
+                    Purpose
+
+                    <textarea
+                        id="reservationPurpose"
+                        rows="4"
+                        placeholder="Enter the purpose of your reservation..."
+                        required></textarea>
+
+                </label>
+
+            </div>
+
+
+            <div
+                id="reservationMessage"
+                class="form-message">
+            </div>
+
+
+            <div class="modal-actions">
+
+                <button
+                    type="button"
+                    class="btn outline"
+                    id="cancelReservationBtn">
+
+                    Cancel
+
+                </button>
+
+                <button
+                    type="submit"
+                    class="btn primary">
+
+                    <i class="fa-solid fa-paper-plane"></i>
+                    Submit Request
+
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<!-- SUPABASE -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script src="js/supabase.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/facilities.js"></script>
+<script src="js/reservations.js"></script>
+<script src="js/dashboard.js"></script>
+
+</body>
+</html>
