@@ -69,15 +69,15 @@ Completed
 
 Administrator:
 admin@adssu.edu.ph
-admin123
+password:admin123
 
 Facility Staff:
 staff@adssu.edu.ph
-staff123
+password:staff123
 
 Requester:
 jahaziel@adssu.edu.ph
-jahaziel123
+password:jahaziel123
 
 ## Deployment
 
